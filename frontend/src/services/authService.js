@@ -2,12 +2,17 @@ import api from './api';
 
 export const authService = {
   login: async (username, password) => {
-    const response = await api.post('/auth/login', { username, password });
-    if (response.data.access_token) {
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('founder', response.data.founder);
+    try {
+      const response = await api.post('/auth/login', { username, password });
+      if (response.data.access_token) {
+        localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('founder', response.data.founder);
+      }
+      return response.data;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
     }
-    return response.data;
   },
 
   logout: () => {
@@ -20,6 +25,7 @@ export const authService = {
       const response = await api.get('/auth/verify');
       return response.data;
     } catch (error) {
+      console.error('Verify error:', error);
       localStorage.removeItem('access_token');
       return null;
     }

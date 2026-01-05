@@ -19,11 +19,16 @@ export const Login = () => {
       return;
     }
 
-    const success = await login(username, password);
-    if (success) {
-      navigate('/dashboard');
-    } else {
-      setLocalError(error || 'Login failed. Please check your credentials.');
+    try {
+      const success = await login(username, password);
+      if (success) {
+        navigate('/dashboard');
+      } else {
+        setLocalError(error || 'Login failed. Please check your credentials.');
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      setLocalError(error || 'Login failed. Is the backend running on http://localhost:8000?');
     }
   };
 

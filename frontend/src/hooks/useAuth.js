@@ -9,15 +9,22 @@ export const useAuth = () => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const userData = await authService.verify();
-        if (userData) {
-          setUser(userData);
+        const token = localStorage.getItem('access_token');
+        if (token) {
+          const userData = await authService.verify();
+          if (userData) {
+            setUser(userData);
+          } else {
+            setUser(null);
+            localStorage.removeItem('access_token');
+          }
         } else {
           setUser(null);
         }
       } catch (err) {
-        setError(err.message);
+        console.error('Auth verification error:', err);
         setUser(null);
+        localStorage.removeItem('access_token');
       } finally {
         setLoading(false);
       }
@@ -29,15 +36,17 @@ export const useAuth = () => {
   const login = async (username, password) => {
     try {
       setLoading(true);
+      setError(null);
       const data = await authService.login(username, password);
       setUser({
         founder: data.founder,
         authenticated: true,
       });
-      setError(null);
       return true;
     } catch (err) {
-      setError(err.response?.data?.detail || 'Login failed');
+      const errorMsg = err.response?.data?.detail || err.message || 'Login failed';
+      console.error('Login error:', errorMsg);
+      setError(errorMsg);
       return false;
     } finally {
       setLoading(false);

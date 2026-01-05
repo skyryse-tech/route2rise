@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
 from fastapi import HTTPException, status, Depends
-from fastapi.security import HTTPBearer, HTTPAuthCredentials
+from fastapi.security import HTTPBearer
 from app.config import settings
 from app.models import FounderEnum
 import logging
@@ -27,7 +27,7 @@ def create_access_token(username: str, founder_name: str, expires_delta: Optiona
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt
 
-async def verify_token(credentials: HTTPAuthCredentials = Depends(security)):
+async def verify_token(credentials = Depends(security)):
     """Verify JWT token and return user info"""
     token = credentials.credentials
     

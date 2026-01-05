@@ -1,17 +1,17 @@
-from motor.motor_asyncio import AsyncClient, AsyncDatabase
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from app.config import settings
 import logging
 
 logger = logging.getLogger(__name__)
 
 class Database:
-    client: AsyncClient = None
-    db: AsyncDatabase = None
+    client: AsyncIOMotorClient = None
+    db: AsyncIOMotorDatabase = None
 
 async def connect_db():
     """Connect to MongoDB"""
     try:
-        Database.client = AsyncClient(settings.MONGODB_URL)
+        Database.client = AsyncIOMotorClient(settings.MONGODB_URL)
         Database.db = Database.client[settings.DATABASE_NAME]
         
         # Test connection

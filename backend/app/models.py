@@ -14,6 +14,7 @@ class SectorEnum(str, Enum):
     MANUFACTURING = "Manufacturing"
     RETAIL = "Retail"
     HOSPITALITY = "Hospitality"
+    RESTAURANT = "Restaurant"
     TECHNOLOGY = "Technology"
     OTHER = "Other"
 

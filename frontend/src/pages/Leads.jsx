@@ -6,7 +6,7 @@ import './Leads.css';
 
 const SECTORS = [
   'Healthcare', 'Real Estate', 'SaaS', 'Education', 'E-commerce',
-  'Finance', 'Manufacturing', 'Retail', 'Hospitality', 'Technology', 'Other'
+  'Finance', 'Manufacturing', 'Retail', 'Hospitality', 'Restaurant', 'Technology', 'Other'
 ];
 
 const STATUSES = [
