@@ -186,6 +186,59 @@
     grid-column: 1 / -1;
 }
 
+.recent-updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recent-update-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg-tertiary);
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    transition: all 250ms ease;
+}
+
+.recent-update-item:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 217, 255, 0.05);
+}
+
+.update-company {
+    font-weight: 700;
+    color: var(--accent-cyan);
+    min-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.founder-initial {
+    background: var(--accent-yellow);
+    color: #000000;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    border: 2px solid #000000;
+    flex-shrink: 0;
+}
+
+.update-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-left: auto;
+    white-space: nowrap;
+}
+
 .full-width table {
     width: 100%;
     border-collapse: collapse;
@@ -277,6 +330,8 @@
 @media (max-width: 768px) {
     .dashboard {
         padding: 16px;
+        padding-top: 70px;
+        padding-bottom: 100px;
     }
 
     .dashboard h1 {
@@ -329,6 +384,36 @@
     .sector-item {
         padding: 10px;
         font-size: 13px;
+    }
+
+    .recent-update-item {
+        padding: 10px 12px;
+        gap: 8px;
+        border: 2px solid var(--border);
+        border-radius: 15px;
+    }
+
+    .update-company {
+        font-size: 11px;
+        min-width: 100px;
+    }
+
+    .founder-initial {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+        border: 2px solid #000000;
+    }
+
+    .status-badge {
+        padding: 4px 8px;
+        font-size: 9px;
+        border: 2px solid #000000;
+        flex-shrink: 0;
+    }
+
+    .update-date {
+        font-size: 10px;
     }
 
     .full-width th {

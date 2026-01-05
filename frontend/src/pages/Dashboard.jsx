@@ -93,32 +93,18 @@ export const Dashboard = () => {
       <div className="dashboard-section full-width">
         <h2>Recently Updated</h2>
         {stats.recent_updates.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Sector</th>
-                <th>Status</th>
-                <th>Owner</th>
-                <th>Updated</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stats.recent_updates.map((lead) => (
-                <tr key={lead._id}>
-                  <td>{lead.company_name}</td>
-                  <td>{lead.sector}</td>
-                  <td>
-                    <span className={`status-badge status-${lead.status.toLowerCase().replace(/[- ]/g, '')}`}>
-                      {lead.status}
-                    </span>
-                  </td>
-                  <td>{lead.assigned_to}</td>
-                  <td>{new Date(lead.updated_at).toLocaleDateString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="recent-updates-list">
+            {stats.recent_updates.map((lead) => (
+              <div key={lead._id} className="recent-update-item">
+                <div className="update-company">{lead.company_name}</div>
+                <span className={`status-badge status-${lead.status.toLowerCase().replace(/[- ]/g, '')}`}>
+                  {lead.status}
+                </span>
+                <div className="founder-initial">{lead.assigned_to ? lead.assigned_to.charAt(0).toUpperCase() : '-'}</div>
+                <div className="update-date">{new Date(lead.updated_at).toLocaleDateString()}</div>
+              </div>
+            ))}
+          </div>
         ) : (
           <p className="empty-state">No recent updates</p>
         )}
