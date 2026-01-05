@@ -13,18 +13,41 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const checkAuth = async () => {
+    console.log('Checking authentication...');
+    if (!authService.isAuthenticated()) {
+      console.log('No token found');
+      setIsAuthenticated(false);
+      return;
+    }
+
+    const verified = await authService.verify();
+    const authenticated = !!verified;
+    console.log('Auth verification result:', authenticated);
+    setIsAuthenticated(authenticated);
+  };
+
   useEffect(() => {
-    const checkAuth = async () => {
-      const verified = await authService.verify();
-      setIsAuthenticated(!!verified);
-      setLoading(false);
+    // Initial auth check
+    checkAuth().then(() => setLoading(false));
+
+    // Recheck auth every 5 seconds to catch login state changes
+    const interval = setInterval(() => {
+      checkAuth();
+    }, 5000);
+
+    // Also listen for storage changes
+    const handleStorageChange = () => {
+      console.log('Storage changed, rechecking auth...');
+      checkAuth();
     };
 
-    if (authService.isAuthenticated()) {
-      checkAuth();
-    } else {
-      setLoading(false);
-    }
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   if (loading) {

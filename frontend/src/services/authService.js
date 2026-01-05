@@ -3,14 +3,20 @@ import api from './api';
 export const authService = {
   login: async (username, password) => {
     try {
+      console.log('Sending login request to:', process.env.NODE_ENV === 'production' ? 'https://api.route2rise.com' : 'http://localhost:8000');
       const response = await api.post('/auth/login', { username, password });
-      if (response.data.access_token) {
+      console.log('Login response:', response.data);
+      
+      if (response.data && response.data.access_token) {
+        console.log('Token received:', response.data.access_token.substring(0, 20) + '...');
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('founder', response.data.founder);
+        console.log('Token stored in localStorage');
       }
       return response.data;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login API error:', error.message);
+      console.error('Error response:', error.response?.data);
       throw error;
     }
   },

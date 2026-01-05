@@ -36,8 +36,8 @@ class SourceEnum(str, Enum):
     OTHER = "Other"
 
 class FounderEnum(str, Enum):
-    FOUNDER_A = "Founder A"
-    FOUNDER_B = "Founder B"
+    FOUNDER_A = "Rudra"
+    FOUNDER_B = "Dhruvil"
 
 # Pydantic Models
 
@@ -76,7 +76,7 @@ class LeadUpdate(BaseModel):
     company_name: Optional[str] = None
     sector: Optional[SectorEnum] = None
     website_url: Optional[str] = None
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None  # Changed from EmailStr to allow empty strings
     mobile_number: Optional[str] = None
     full_address: Optional[str] = None
     source: Optional[SourceEnum] = None
@@ -85,6 +85,9 @@ class LeadUpdate(BaseModel):
     latest_reply_notes: Optional[str] = None
     call_schedule_date: Optional[datetime] = None
     next_follow_up_date: Optional[datetime] = None
+
+    class Config:
+        use_enum_values = False
 
 class LeadResponse(LeadBase):
     id: str = Field(alias="_id")

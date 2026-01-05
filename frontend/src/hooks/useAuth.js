@@ -37,15 +37,27 @@ export const useAuth = () => {
     try {
       setLoading(true);
       setError(null);
+      console.log('useAuth.login called');
+      
       const data = await authService.login(username, password);
+      console.log('Auth service login returned:', data);
+      
+      if (!data || !data.access_token) {
+        console.error('No access token in response');
+        setError('No token received from server');
+        return false;
+      }
+      
+      console.log('Setting user to:', { founder: data.founder, authenticated: true });
       setUser({
         founder: data.founder,
         authenticated: true,
       });
+      
       return true;
     } catch (err) {
       const errorMsg = err.response?.data?.detail || err.message || 'Login failed';
-      console.error('Login error:', errorMsg);
+      console.error('Login error caught in hook:', errorMsg);
       setError(errorMsg);
       return false;
     } finally {

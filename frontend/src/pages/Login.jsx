@@ -20,10 +20,20 @@ export const Login = () => {
     }
 
     try {
+      console.log('Attempting login with username:', username);
       const success = await login(username, password);
+      console.log('Login result:', success);
+      console.log('Token in storage:', localStorage.getItem('access_token'));
+      
       if (success) {
-        navigate('/dashboard');
+        console.log('Login successful, navigating to dashboard...');
+        // Use setTimeout to ensure state updates propagate
+        setTimeout(() => {
+          console.log('Now navigating...');
+          navigate('/dashboard', { replace: true });
+        }, 100);
       } else {
+        console.log('Login returned false. Error:', error);
         setLocalError(error || 'Login failed. Please check your credentials.');
       }
     } catch (err) {
