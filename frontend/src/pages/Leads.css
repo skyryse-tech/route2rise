@@ -362,19 +362,33 @@
 }
 
 @media (max-width: 768px) {
+    .leads-page {
+        padding: 16px;
+    }
+
     .leads-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .leads-header h1 {
+        font-size: 32px;
     }
 
     .filters {
         flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
     }
 
     .filter-input,
     .filter-select {
         width: 100%;
+        padding: 8px 12px;
+        font-size: 13px;
+        border-radius: 15px;
     }
 
     .form-row {
@@ -382,15 +396,48 @@
     }
 
     .leads-table {
-        font-size: 13px;
+        font-size: 12px;
+    }
+
+    .leads-table-container {
+        border-radius: 20px;
+        border: 3px solid var(--border);
     }
 
     .leads-table th,
     .leads-table td {
-        padding: 10px;
+        padding: 8px 6px;
+        font-size: 11px;
     }
 
-    .leads-header h1 {
-        font-size: 28px;
+    .company-cell {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        border-radius: 20px;
+    }
+
+    .btn-small {
+        padding: 5px 8px;
+        font-size: 10px;
+        border-radius: 12px;
+    }
+
+    .status-select {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    .inline-date {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    .toast {
+        font-size: 12px;
+        padding: 10px 16px;
     }
 }

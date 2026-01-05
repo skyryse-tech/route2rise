@@ -20,6 +20,11 @@ export const Sidebar = () => {
         <p>Lead Management</p>
       </div>
 
+      {/* Mobile header - different div */}
+      <div className="mobile-header">
+        <span className="brand-pill-mobile">Route 2 Rise</span>
+      </div>
+
       <nav className="sidebar-nav">
         <Link
           to="/dashboard"
